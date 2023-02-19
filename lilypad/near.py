@@ -4,11 +4,11 @@ import subprocess
 import json
 from pprint import pprint
 
-INITIAL_BUSINESS_BALANCE = 10
-INITIAL_PERSON_BALANCE = 100
+INITIAL_BUSINESS_BALANCE = 5
+INITIAL_PERSON_BALANCE = 5
 
-INITIAL_BUSINESS_FROG = int(1e10)
-INITIAL_INVESTOR_FROG = 1
+INITIAL_BUSINESS_FROG = 1000
+INITIAL_INVESTOR_FROG = 1000
 
 def execute(command, out):
     print(command)
@@ -65,25 +65,33 @@ def create_user(username):
     out = [None]
     command = f"near create-account {username}.lilypad.testnet --masterAccount lilypad.testnet --initialBalance {INITIAL_PERSON_BALANCE}"
     execute(command, out)
-    return get_account_state(username)
+    initialize_frog_balance(INITIAL_BUSINESS_FROG, f"{username}.lilypad.testnet")
+    return 'success'
 
 def initialize_frog_balance(balance, account_name):
-    command = '''near call $ID storage_deposit '{"account_id": "''' + account_name + '''"}' --accountId lilypad.testnet --amount ''' + str(balance)
+    command = '''near call lilypad.testnet storage_deposit '' --accountId ''' + account_name + ''' --amount ''' + str(.00125)
     out = [None]
     execute(command, out)
-    return parse_json(out[0])
-
-def transfer_frog(reciever, amount):
-    command = '''near call lilypad.testnet ft_transfer {"receiver_id": "''' + reciever + '''", "amount": "''' + str(amount) + '''"}' --accountId $ID --amount 0.000000000000000000000001'''
-    out = [None]
-    execute(command, out)
-    return parse_json(out[0])
 
 def get_frog_balance(account):
     command = '''near view lilypad.testnet ft_balance_of '{"account_id": "''' + account + '''"}' '''
     out = [None]
     execute(command, out)
-    return parse_json(out[0])
+    raw = ''.join(out[0].split('\n')[1:-1])
+    raw = raw.replace("'", '')
+    return int(raw)
+
+def transfer_frog(reciever, amount):
+    command = '''near call lilypad.testnet ft_transfer '{"receiver_id": "''' + reciever + '''", "amount": "''' + str(amount) + '''"}' --accountId lilypad.testnet --amount 0.000000000000000000000001'''
+    out = [None]
+    execute(command, out)
+    return 'success'
+
+def subtract_near(username, amount):
+    command = f'''near send {username}.lilypad.testnet lilypad.testnet {amount}'''
+    out = [None]
+    execute(command, out)
+    return 'success'
 
 if __name__ == '__main__':
     r = get_account_state('cpratim1')

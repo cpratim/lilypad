@@ -1,12 +1,14 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, redirect
 from near import *
 from database import Database
 from config import MONGODB_DBNAME as dbname
 from config import MONGODB_PASSWORD as password
+from pprint import pprint
 
 db = Database()
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "lilypad"
 
 @app.route('/create-business/<business_name>')
 def create_business_api(business_name):
@@ -34,17 +36,37 @@ def browse():
 
 @app.route('/purchase')
 def purchase():
-    return render_template('purchase.html')
+    if 'username' not in session:
+        return render_template('login.html')
+    username = session.get('username')
+    state = get_account_state(username)
+    frog = get_frog_balance(f"{username}.lilypad.testnet")
+    state['formattedAmount'] = state['formattedAmount'][:5]
+    pprint(state)
+    pprint(frog)
+    return render_template('purchase.html', username=username, state=state, frog=frog)
 
-@app.route('/get_user_state/<user_id>')
-def get_user_state(user_id):
-    return get_user_state(user_id)
+
+@app.route('/login/<username>')
+def login(username):
+    session['username'] = username
+    return redirect('/browse')
 
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.get_json()
     username = data['username']
+    session['username'] = username
     create_user(username)
+    return 'Success'
+
+@app.route('/api/buy', methods=['POST'])
+def buy():
+    data = request.get_json()
+    amount = int(data['amount'])
+    username = session.get('username')
+    transfer_frog(f"{username}.lilypad.testnet", amount)
+    subtract_near(username, amount)
     return 'Success'
 
 if __name__ == '__main__':
