@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-wrapper">
+        <div class="banner">
+          <h1>Welcome!</h1>
+          <p>At Lilypad, we uplift local small businesses.</p>
+          <br>
+          <p>It's simple: sign up as a small business or community investor. Then, find people who believe in your initiatives. </p>
+        </div>
+        <div class="green-bg">
+          <button type="button">Learn More</button>
+        </div>
+        <form class="signup-form">
+          <h1>Create Account</h1>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="username" placeholder="username" />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="email" />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="password" />
+          </div>
+          <div class="radio-inline">
+            <p>Pick account type:</p>
+            <input type="radio" name="acc-type" checked>Small Business
+            <input type="radio" name="acc-type">Community Investor
+          </div>
+          <button type="button" id="submit">Begin Journey</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../static/js/index.js"></script>
+  </body>
+</html>

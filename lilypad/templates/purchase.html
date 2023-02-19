@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Invest in a Business </title>
+    <link rel="stylesheet" href="../static/css/purchase.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div id="grid-container">
+        <div class="grid-item left">
+            <h1 id="about-title" style="color:#368062">UNCLE IROH'S TEA SHOPPE</h1>
+            <h5 id="about-name" style="color:#368062">Uncle Iroh</h5>
+            <p id="about-desc">
+                <span style="font-size: 25px; color:#4cbf91; font-weight: bold">Our Story:</span>    
+                For me, tea is not just a beverage, but a way of life - a symbol of peace,
+                harmony, and hospitality. My love for tea has blossomed into my small tea shop, where I can
+                carefully select and blend different tea leaves. Through my tea business, I
+                hope to spread joy and comfort to all who visit. To me, there is nothing more satisfying than seeing the joy on
+                someone's face as they take that first sip of a perfectly brewed cup of tea. Please support my humble tea
+                shop!
+            </p>
+            <img id="about-image" src="../static/misc/uncle-iroh.jpeg" alt="Uncle Iroh's Tea">
+        </div>
+        <div class="grid-item right">
+            <div class = "right-content-wrapper" style="background-color: #bdfbe2;">
+                <div id="user-data-order-wrapper">
+                    <div id="user-data-box" style="background-color: white">
+                        <div id="active-order-box-header">
+                            <div id="active-order-box-header-text">pigwidgeon:</div>
+                        </div>
+                        <div class="active-order-row row-bottom-border">
+                            <div class="active-order-row-label">Balance:</div>
+                            <div id="balance" class="active-order-row-value">$100</div>
+                        </div>
+                        <div class="active-order-row row-bottom-border">
+                            <div class="active-order-row-label">Portfolio Value:</div>
+                            <div id="portfolio-value" class="active-order-row-value">$80</div>
+                        </div>
+                        <div class="active-order-row">
+                            <div class="active-order-row-label">Shares Owned:</div>
+                            <div id="pieces-owned" class="active-order-row-value">8</div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div id="order-wrapper">
+                    <div id="order-box">
+                        <div id="order-form-wrapper">
+                            <div class="order-input">
+                                <div class="order-input-label" id="price-input-label">Market Price: </div>
+                                <input id="price-input" class="order-input-field" type="text" placeholder="8.0" disabled>
+                            </div>
+                            <div class="order-input">
+                                <div class="order-input-label">Quantity:</div>
+                                <input id="quantity-input" class="order-input-field" type="text" placeholder="10">
+                            </div>
+                            <div id="order-estimate">Estimated Order Cost: $80</div>
+                        </div>
+                        <div id="order-button-wrapper">
+                            <button id="order-button">Submit Purchase Request</button>
+                        </div>
+                        <div id="order-box-footer">
+                            <div id="order-box-footer-text">$100 buying power available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
